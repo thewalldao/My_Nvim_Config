@@ -51,6 +51,8 @@ filetype plugin on
 " endfunction
 " let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
+nmap <Leader>kt :set keymap=vietnamese-telex<CR>
+nmap <Leader>kd :set keymap=<CR>
 nmap <F5> :FZF<CR>
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :TagbarToggle<CR>
