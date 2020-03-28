@@ -61,6 +61,7 @@ set background=dark " use dark mode
 " True color
 set termguicolors
 set relativenumber
+set mouse=a
 
 " easymotion
 " <Leader>f{char} to move to {char}
