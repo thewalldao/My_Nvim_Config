@@ -2,35 +2,39 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+" General Plugin
 Plug 'scrooloose/nerdtree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'joshdick/onedark.vim'
 Plug 'sbdchd/neoformat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
+
+" Language support
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Color Schemes
+Plug 'joshdick/onedark.vim'
 
 " Initialize plugin system
 call plug#end()
 
+"-------------------------------------------------------------
+" General Setting
+"-------------------------------------------------------------
 filetype plugin on
-
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F5> :FZF<CR>
 nmap <F7> :TagbarToggle<CR>
-
 colorscheme onedark
 set background=dark " use dark mode
 " set background=light " uncomment to use light mode
-
 " True color
 set termguicolors
-
 set relativenumber
 
 " easymotion
