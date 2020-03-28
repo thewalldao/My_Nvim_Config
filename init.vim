@@ -26,10 +26,35 @@ call plug#end()
 "-------------------------------------------------------------
 " General Setting
 "-------------------------------------------------------------
+
 filetype plugin on
-nmap <F6> :NERDTreeToggle<CR>
+" Uncomment if wanting use FZF and floating window
+" function! FloatingFZF()
+"   let buf = nvim_create_buf(v:false, v:true)
+"   call setbufvar(buf, '&signcolumn', 'no')
+"
+"   let height = float2nr(20)
+"   let width = float2nr(100)
+"   let horizontal = float2nr((&columns - width) / 2)
+"   let vertical = 0 " float2nr((&lines - height))
+"
+"   let opts = {
+"         \ 'relative': 'editor',
+"         \ 'row': vertical,
+"         \ 'col': horizontal,
+"         \ 'width': width,
+"         \ 'height': height,
+"         \ 'style': 'minimal'
+"         \ }
+"
+"   call nvim_open_win(buf, v:true, opts)
+" endfunction
+" let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
 nmap <F5> :FZF<CR>
+nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :TagbarToggle<CR>
+
 colorscheme onedark
 set background=dark " use dark mode
 " set background=light " uncomment to use light mode
@@ -200,6 +225,5 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 "python.jediEnabled": false
