@@ -13,6 +13,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
+Plug 'airblade/vim-gitgutter'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -56,6 +57,7 @@ filetype plugin on
 
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
 nmap <Leader>kd :set keymap=<CR>
+nmap <F4> :GitGutterToggle<CR>
 nmap <F5> :FZF<CR>
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :TagbarToggle<CR>
@@ -90,6 +92,18 @@ set expandtab
 " highlight ColorColumn ctermbg=0 guibg=onedark
 nmap <silent> <leader>c :execute "set colorcolumn="
                   \ . (&colorcolumn == "" ? "80" : "")<CR>
+
+" gitguter
+let g:gitgutter_max_signs = 500  " default value
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
+omap ih <Plug>(GitGutterTextObjectInnerPending)
+omap ah <Plug>(GitGutterTextObjectOuterPending)
+xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+xmap ah <Plug>(GitGutterTextObjectOuterVisual)
 
 " easymotion
 " <Leader>f{char} to move to {char}
