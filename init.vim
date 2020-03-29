@@ -81,6 +81,12 @@ set background=dark " use dark mode
 " True color
 set relativenumber
 set mouse=a
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
 " highlight ColorColumn ctermbg=0 guibg=onedark
 nmap <silent> <leader>c :execute "set colorcolumn="
                   \ . (&colorcolumn == "" ? "80" : "")<CR>
