@@ -13,13 +13,15 @@ Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
-Plug 'ryanoasis/vim-devicons'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Color Schemes
+" Color Schemes , Icon
 Plug 'joshdick/onedark.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'ryanoasis/vim-devicons'
+Plug 'icymind/neosolarized'
 
 " Initialize plugin system
 call plug#end()
@@ -61,14 +63,27 @@ nmap <F7> :TagbarToggle<CR>
 syntax enable
 set encoding=UTF-8
 set termguicolors
-colorscheme onedark
+let g:airline_theme='onedark'
+let g:solarized_termcolors=256
 let g:onedark_termcolors=256
+let g:onedark_hide_endofbuffer=1
+let g:onedark_terminal_italics=1
+" let g:neosolarized_contrast = "normal" " 'hight' , 'low', 'normal'
+" let g:neosolarized_visibility = "normal" " 'hight' , 'low', 'normal'
+" let g:neosolarized_vertSplitBgTrans = 1 " 0
+" let g:neosolarized_bold = 1
+" let g:neosolarized_underline = 1
+" let g:neosolarized_italic = 1
+" let g:neosolarized_termBoldAsBright = 1
+colorscheme onedark
 set background=dark " use dark mode
 " set background=light " uncomment to use light mode
 " True color
 set relativenumber
 set mouse=a
-
+" highlight ColorColumn ctermbg=0 guibg=onedark
+nmap <silent> <leader>c :execute "set colorcolumn="
+                  \ . (&colorcolumn == "" ? "80" : "")<CR>
 
 " easymotion
 " <Leader>f{char} to move to {char}
