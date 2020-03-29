@@ -13,6 +13,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
+Plug 'ryanoasis/vim-devicons'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -57,13 +58,17 @@ nmap <F5> :FZF<CR>
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :TagbarToggle<CR>
 
+syntax enable
+set encoding=UTF-8
+set termguicolors
 colorscheme onedark
+let g:onedark_termcolors=256
 set background=dark " use dark mode
 " set background=light " uncomment to use light mode
 " True color
-set termguicolors
 set relativenumber
 set mouse=a
+
 
 " easymotion
 " <Leader>f{char} to move to {char}
