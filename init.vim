@@ -14,6 +14,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -55,14 +56,22 @@ filetype plugin on
 " endfunction
 " let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
+
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
 nmap <Leader>kd :set keymap=<CR>
 nmap <F4> :GitGutterToggle<CR>
 nmap <F5> :FZF<CR>
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :TagbarToggle<CR>
+" autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+" autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python' shellescape(@%, 1)<CR>
+autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
+autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
+autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
+
 
 syntax enable
+autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file 
 set encoding=UTF-8
 set termguicolors
 let g:airline_theme='onedark'
@@ -81,8 +90,11 @@ colorscheme onedark
 set background=dark " use dark mode
 " set background=light " uncomment to use light mode
 " True color
-set relativenumber
+set number relativenumber
 set mouse=a
+" set foldmethod=syntax
+" autocmd FileType c,cpp set noet sw=2
+" autocmd FileType python set et sw=4
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width
@@ -92,6 +104,17 @@ set expandtab
 " highlight ColorColumn ctermbg=0 guibg=onedark
 nmap <silent> <leader>c :execute "set colorcolumn="
                   \ . (&colorcolumn == "" ? "80" : "")<CR>
+
+" vimux
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+" Zoom the tmux runner pane
+map <Leader>vz :VimuxZoomRunner<CR>
+
 
 " gitguter
 let g:gitgutter_max_signs = 500  " default value
