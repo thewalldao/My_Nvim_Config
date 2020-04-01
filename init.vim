@@ -33,47 +33,24 @@ call plug#end()
 "-------------------------------------------------------------
 
 filetype plugin on
-" Uncomment if wanting use FZF and floating window
-" function! FloatingFZF()
-"   let buf = nvim_create_buf(v:false, v:true)
-"   call setbufvar(buf, '&signcolumn', 'no')
-"
-"   let height = float2nr(20)
-"   let width = float2nr(100)
-"   let horizontal = float2nr((&columns - width) / 2)
-"   let vertical = 0 " float2nr((&lines - height))
-"
-"   let opts = {
-"         \ 'relative': 'editor',
-"         \ 'row': vertical,
-"         \ 'col': horizontal,
-"         \ 'width': width,
-"         \ 'height': height,
-"         \ 'style': 'minimal'
-"         \ }
-"
-"   call nvim_open_win(buf, v:true, opts)
-" endfunction
-" let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
 nmap <Leader>kd :set keymap=<CR>
 nmap <F4> :GitGutterToggle<CR>
 nmap <F5> :FZF<CR>
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :TagbarToggle<CR>
-" autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
-" autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python' shellescape(@%, 1)<CR>
 autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
 autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
 autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
 
-
 syntax enable
-autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file 
+autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
+set nobackup
+set noswapfile
 set encoding=UTF-8
 set termguicolors
+set splitbelow
+set splitright
 let g:airline_theme='onedark'
 let g:solarized_termcolors=256
 let g:onedark_termcolors=256
