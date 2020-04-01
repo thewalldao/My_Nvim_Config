@@ -8,9 +8,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sbdchd/neoformat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'easymotion/vim-easymotion'
-Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
@@ -39,9 +39,13 @@ nmap <F4> :GitGutterToggle<CR>
 nmap <F5> :FZF<CR>
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :TagbarToggle<CR>
-autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
-autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
-autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
+" autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
+" autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
+" autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
+autocmd Filetype python nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term python %<CR>
+autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
+autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
+
 
 syntax enable
 autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
@@ -82,6 +86,7 @@ set expandtab
 nmap <silent> <leader>c :execute "set colorcolumn="
                   \ . (&colorcolumn == "" ? "80" : "")<CR>
 
+
 " vimux
 " Prompt for a command to run
 map <Leader>vp :VimuxPromptCommand<CR>
@@ -105,37 +110,6 @@ omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
 xmap ah <Plug>(GitGutterTextObjectOuterVisual)
 
-" easymotion
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-let g:EasyMotion_smartcase = 1
-
-" nerdcomment
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDToggleCheckAllLines = 1
 
 " coc.vim
 " TextEdit might fail if hidden is not set.
