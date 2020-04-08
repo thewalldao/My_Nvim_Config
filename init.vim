@@ -15,6 +15,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+Plug 'easymotion/vim-easymotion'
+Plug 'mbbill/undotree'
+Plug 'tpope/vim-rhubarb'
+
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -36,16 +42,17 @@ filetype plugin on
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
 nmap <Leader>kd :set keymap=<CR>
 nmap <F4> :GitGutterToggle<CR>
-nmap <F5> :FZF<CR>
-nmap <F6> :NERDTreeToggle<CR>
-nmap <F7> :TagbarToggle<CR>
+nmap <F5> :NERDTreeToggle<CR>
+nmap <F6> :TagbarToggle<CR>
+nnoremap <F7> :UndotreeToggle<cr>
+nmap <C-p> :FZF<CR>
 " autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
 autocmd Filetype python nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term python %<CR>
 autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
 autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
-
+nnoremap gb :ls<CR>:b<Space>
 
 syntax enable
 autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
@@ -71,21 +78,23 @@ colorscheme onedark
 set background=dark " use dark mode
 " set background=light " uncomment to use light mode
 " True color
-set number relativenumber
+set number "relativenumber
 set mouse=a
 " set foldmethod=syntax
-" autocmd FileType c,cpp set noet sw=2
-" autocmd FileType python set et sw=4
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
+autocmd FileType c,cpp set noet sw=2
+autocmd FileType python set et sw=4
+" " show existing tab with 4 spaces width
+" set tabstop=4
+" " when indenting with '>', use 4 spaces width
+" set shiftwidth=4
+" " On pressing tab, insert 4 spaces
+" set expandtab
 " highlight ColorColumn ctermbg=0 guibg=onedark
 nmap <silent> <leader>c :execute "set colorcolumn="
                   \ . (&colorcolumn == "" ? "80" : "")<CR>
 
+" easymotion
+map <Leader> <Plug>(easymotion-prefix)
 
 " vimux
 " Prompt for a command to run
@@ -244,3 +253,4 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 
 "python.jediEnabled": false
+
