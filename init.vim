@@ -30,6 +30,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'ryanoasis/vim-devicons'
 Plug 'icymind/neosolarized'
+Plug 'vimwiki/vimwiki'
+
 
 " Initialize plugin system
 call plug#end()
@@ -38,7 +40,7 @@ call plug#end()
 " General Setting
 "-------------------------------------------------------------
 
-filetype plugin on
+filetype plugin indent on
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
 nmap <Leader>kd :set keymap=<CR>
 nmap <F4> :GitGutterToggle<CR>
@@ -49,19 +51,22 @@ nmap <C-p> :FZF<CR>
 " autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
-autocmd Filetype python nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term python %<CR>
+autocmd Filetype python nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term python "%"<CR>
 autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
 autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
 nnoremap gb :ls<CR>:b<Space>
 
 syntax enable
 autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
-set nobackup
+" set nobackup " show in line 129th
+set clipboard=unnamedplus " coppy vim to outside
 set noswapfile
 set encoding=UTF-8
 set termguicolors
 set splitbelow
 set splitright
+set hlsearch
+set incsearch
 let g:airline_theme='onedark'
 let g:solarized_termcolors=256
 let g:onedark_termcolors=256
