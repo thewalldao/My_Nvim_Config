@@ -10,8 +10,6 @@ Plug 'sbdchd/neoformat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
@@ -20,7 +18,10 @@ Plug 'kana/vim-textobj-entire'
 Plug 'easymotion/vim-easymotion'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-rhubarb'
-
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -46,19 +47,24 @@ nmap <Leader>kd :set keymap=<CR>
 nmap <F4> :GitGutterToggle<CR>
 nmap <F5> :NERDTreeToggle<CR>
 nmap <F6> :TagbarToggle<CR>
-nnoremap <F7> :UndotreeToggle<cr>
+nmap <F7> :UndotreeToggle<cr>
 nmap <C-p> :FZF<CR>
 " autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
-autocmd Filetype python nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term python "%"<CR>
-autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
-autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
-nnoremap gb :ls<CR>:b<Space>
+autocmd Filetype python nmap <buffer> <F9> :w<CR> :12sp <CR> :term python "%"<CR>
+autocmd Filetype c,cpp nmap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
+autocmd Filetype c,cpp nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
+nmap gb :ls<CR>:b<Space>
+nmap <CR> :nohlsearch<cr>
+" navigate window easier
+nmap <C-J> <C-W><C-J>
+nmap <C-K> <C-W><C-K>
+nmap <C-L> <C-W><C-L>
+nmap <C-H> <C-W><C-H>
 
 syntax enable
 autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
-" set nobackup " show in line 129th
 set clipboard=unnamedplus " coppy vim to outside
 set noswapfile
 set encoding=UTF-8
@@ -67,6 +73,22 @@ set splitbelow
 set splitright
 set hlsearch
 set incsearch
+set t_Co=256
+" TextEdit might fail if hidden is not set.
+set hidden
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+" Give more space for displaying messages.
+set cmdheight=2
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
 let g:airline_theme='onedark'
 let g:solarized_termcolors=256
 let g:onedark_termcolors=256
@@ -74,12 +96,12 @@ let g:onedark_hide_endofbuffer=1
 let g:onedark_terminal_italics=1
 " let g:neosolarized_contrast = "normal" " 'hight' , 'low', 'normal'
 " let g:neosolarized_visibility = "normal" " 'hight' , 'low', 'normal'
-" let g:neosolarized_vertSplitBgTrans = 1 " 0
+" " let g:neosolarized_vertSplitBgTrans = 1 " 0
 " let g:neosolarized_bold = 1
 " let g:neosolarized_underline = 1
 " let g:neosolarized_italic = 1
 " let g:neosolarized_termBoldAsBright = 1
-colorscheme onedark
+colorscheme onedark 
 set background=dark " use dark mode
 " set background=light " uncomment to use light mode
 " True color
@@ -126,21 +148,6 @@ xmap ah <Plug>(GitGutterTextObjectOuterVisual)
 
 
 " coc.vim
-" TextEdit might fail if hidden is not set.
-set hidden
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-" Give more space for displaying messages.
-set cmdheight=2
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
