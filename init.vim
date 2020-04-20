@@ -55,6 +55,8 @@ nmap <C-p> :FZF<CR>
 autocmd Filetype python nmap <buffer> <F9> :w<CR> :12sp <CR> :term python "%"<CR>
 autocmd Filetype c,cpp nmap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
 autocmd Filetype c,cpp nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
+autocmd Filetype java nmap <buffer> <F9> :w<CR> :12sp <CR> :term javac "%"<CR>
+autocmd Filetype java nmap <buffer> <F10> :w<CR> :12sp <CR> :term java "%<"<CR>
 nmap gb :ls<CR>:b<Space>
 nmap <CR> :nohlsearch<cr>
 " navigate window easier
@@ -65,7 +67,7 @@ nmap <C-H> <C-W><C-H>
 
 syntax enable
 autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
-set clipboard=unnamedplus " coppy vim to outside
+set clipboard=unnamedplus " coppy vim to outside "need install xclip"
 set noswapfile
 set encoding=UTF-8
 set termguicolors
@@ -94,15 +96,8 @@ let g:solarized_termcolors=256
 let g:onedark_termcolors=256
 let g:onedark_hide_endofbuffer=1
 let g:onedark_terminal_italics=1
-" let g:neosolarized_contrast = "normal" " 'hight' , 'low', 'normal'
-" let g:neosolarized_visibility = "normal" " 'hight' , 'low', 'normal'
-" " let g:neosolarized_vertSplitBgTrans = 1 " 0
-" let g:neosolarized_bold = 1
-" let g:neosolarized_underline = 1
-" let g:neosolarized_italic = 1
-" let g:neosolarized_termBoldAsBright = 1
 colorscheme onedark 
-set background=dark " use dark mode
+set background=dark" use dark mode
 " set background=light " uncomment to use light mode
 " True color
 set number "relativenumber
