@@ -22,6 +22,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'vimwiki/vimwiki'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -31,7 +32,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'ryanoasis/vim-devicons'
 Plug 'icymind/neosolarized'
-Plug 'vimwiki/vimwiki'
+Plug 'morhetz/gruvbox'
 
 
 " Initialize plugin system
@@ -40,6 +41,38 @@ call plug#end()
 "-------------------------------------------------------------
 " General Setting
 "-------------------------------------------------------------
+
+" Toggle 'default' terminal
+nnoremap <M-`> :call ChooseTerm("term-slider", 1)<CR>
+tnoremap <M-`> <C-\><C-n>:call ChooseTerm("term-slider", 1)<CR>
+" Start terminal in current pane
+nnoremap <M-CR> :call ChooseTerm("term-pane", 0)<CR>
+ 
+function! ChooseTerm(termname, slider)
+    let pane = bufwinnr(a:termname)
+    let buf = bufexists(a:termname)
+    if pane > 0
+        " pane is visible
+        if a:slider > 0
+            :exe pane . "wincmd c"
+        else
+            :exe "e #"
+        endif
+    elseif buf > 0
+        " buffer is not in pane
+        if a:slider
+            :exe "8split"
+        endif
+        :exe "buffer " . a:termname
+    else
+        " buffer is not loaded, create
+        if a:slider
+            :exe "8split"
+        endif
+        :terminal
+        :exe "f " a:termname
+    endif
+endfunction
 
 filetype plugin indent on
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
@@ -55,6 +88,8 @@ nmap <C-p> :FZF<CR>
 autocmd Filetype python nmap <buffer> <F9> :w<CR> :12sp <CR> :term python "%"<CR>
 autocmd Filetype c,cpp nmap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
 autocmd Filetype c,cpp nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
+autocmd Filetype java nmap <buffer> <F9> :w<CR> :12sp <CR> :term javac "%"<CR>
+autocmd Filetype java nmap <buffer> <F10> :w<CR> :12sp <CR> :term java "%<"<CR>
 nmap gb :ls<CR>:b<Space>
 nmap <CR> :nohlsearch<cr>
 " navigate window easier
@@ -65,7 +100,7 @@ nmap <C-H> <C-W><C-H>
 
 syntax enable
 autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
-set clipboard=unnamedplus " coppy vim to outside
+set clipboard=unnamedplus " coppy vim to outside "need install xclip"
 set noswapfile
 set encoding=UTF-8
 set termguicolors
@@ -89,20 +124,16 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
-let g:airline_theme='onedark'
+let g:airline_theme='gruvbox'
 let g:solarized_termcolors=256
 let g:onedark_termcolors=256
+let g:gruvbox_termcolors=255
 let g:onedark_hide_endofbuffer=1
 let g:onedark_terminal_italics=1
-" let g:neosolarized_contrast = "normal" " 'hight' , 'low', 'normal'
-" let g:neosolarized_visibility = "normal" " 'hight' , 'low', 'normal'
-" " let g:neosolarized_vertSplitBgTrans = 1 " 0
-" let g:neosolarized_bold = 1
-" let g:neosolarized_underline = 1
-" let g:neosolarized_italic = 1
-" let g:neosolarized_termBoldAsBright = 1
-colorscheme onedark 
-set background=dark " use dark mode
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_light='medium'
+colorscheme gruvbox
+set background=light" use dark mode
 " set background=light " uncomment to use light mode
 " True color
 set number "relativenumber
@@ -110,6 +141,7 @@ set mouse=a
 " set foldmethod=syntax
 autocmd FileType c,cpp set noet sw=2
 autocmd FileType python set et sw=4
+autocmd FileType java set et sw=4
 " " show existing tab with 4 spaces width
 " set tabstop=4
 " " when indenting with '>', use 4 spaces width
@@ -265,4 +297,3 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 
 "python.jediEnabled": false
-
