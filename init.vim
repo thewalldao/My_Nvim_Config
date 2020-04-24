@@ -134,6 +134,7 @@ let g:gruvbox_italic=1
 let g:gruvbox_contrast_light='medium'
 colorscheme gruvbox
 set background=light" use dark mode
+
 " set background=light " uncomment to use light mode
 " True color
 set number "relativenumber
