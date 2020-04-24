@@ -42,37 +42,85 @@ call plug#end()
 " General Setting
 "-------------------------------------------------------------
 
-" Toggle 'default' terminal
-nnoremap <M-`> :call ChooseTerm("term-slider", 1)<CR>
-tnoremap <M-`> <C-\><C-n>:call ChooseTerm("term-slider", 1)<CR>
-" Start terminal in current pane
-nnoremap <M-CR> :call ChooseTerm("term-pane", 0)<CR>
- 
-function! ChooseTerm(termname, slider)
-    let pane = bufwinnr(a:termname)
-    let buf = bufexists(a:termname)
-    if pane > 0
-        " pane is visible
-        if a:slider > 0
-            :exe pane . "wincmd c"
-        else
-            :exe "e #"
-        endif
-    elseif buf > 0
-        " buffer is not in pane
-        if a:slider
-            :exe "8split"
-        endif
-        :exe "buffer " . a:termname
-    else
-        " buffer is not loaded, create
-        if a:slider
-            :exe "8split"
-        endif
-        :terminal
-        :exe "f " a:termname
+" With this function you can reuse the same terminal in neovim.
+" You can toggle the terminal and also send a command to the same terminal.
+
+let s:monkey_terminal_window = -1
+let s:monkey_terminal_buffer = -1
+let s:monkey_terminal_job_id = -1
+
+function! MonkeyTerminalOpen()
+  " Check if buffer exists, if not create a window and a buffer
+  if !bufexists(s:monkey_terminal_buffer)
+    " Creates a window call monkey_terminal
+    new monkey_terminal
+    " Moves to the window the right the current one
+    wincmd j
+    resize 10
+    let s:monkey_terminal_job_id = termopen($SHELL, { 'detach': 1 })
+
+     " Change the name of the buffer to "Terminal 1"
+     silent file Terminal\ 1
+     " Gets the id of the terminal window
+     let s:monkey_terminal_window = win_getid()
+     let s:monkey_terminal_buffer = bufnr('%')
+
+    " The buffer of the terminal won't appear in the list of the buffers
+    " when calling :buffers command
+    set nobuflisted
+  else
+    if !win_gotoid(s:monkey_terminal_window)
+    sp
+    " Moves to the window below the current one
+    wincmd j   
+    resize 10
+    buffer Terminal\ 1
+     " Gets the id of the terminal window
+     let s:monkey_terminal_window = win_getid()
     endif
+  endif
 endfunction
+
+function! MonkeyTerminalToggle()
+  if win_gotoid(s:monkey_terminal_window)
+    call MonkeyTerminalClose()
+  else
+    call MonkeyTerminalOpen()
+  endif
+endfunction
+
+function! MonkeyTerminalClose()
+  if win_gotoid(s:monkey_terminal_window)
+    " close the current window
+    hide
+  endif
+endfunction
+
+function! MonkeyTerminalExec(cmd)
+  if !win_gotoid(s:monkey_terminal_window)
+    call MonkeyTerminalOpen()
+  endif
+
+  " clear current input
+  call jobsend(s:monkey_terminal_job_id, "clear\n")
+
+  " run cmd
+  call jobsend(s:monkey_terminal_job_id, a:cmd . "\n")
+  normal! G
+  wincmd p
+endfunction
+
+" With this maps you can now toggle the terminal
+nnoremap <M-`> :call MonkeyTerminalToggle()<cr>
+tnoremap <M-`> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
+
+" This an example on how specify command with different types of files.
+    augroup go
+        autocmd!
+        autocmd BufRead,BufNewFile *.go set filetype=go
+        autocmd FileType go nnoremap <F5> :call MonkeyTerminalExec('go run ' . expand('%'))<cr>
+    augroup END
+
 
 filetype plugin indent on
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
@@ -169,7 +217,7 @@ map <Leader>vz :VimuxZoomRunner<CR>
 
 " gitguter
 let g:gitgutter_max_signs = 500  " default value
-nmap ]h <Plug>(GitGutterNextHunk)
+nmap ]`h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
