@@ -23,6 +23,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'vimwiki/vimwiki'
+Plug 'lilydjwg/colorizer'
+Plug 'mhinz/vim-startify'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -33,7 +35,6 @@ Plug 'mhartington/oceanic-next'
 Plug 'ryanoasis/vim-devicons'
 Plug 'icymind/neosolarized'
 Plug 'morhetz/gruvbox'
-
 
 " Initialize plugin system
 call plug#end()
@@ -125,7 +126,9 @@ tnoremap <M-`> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
 filetype plugin indent on
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
 nmap <Leader>kd :set keymap=<CR>
-nmap <F4> :GitGutterToggle<CR>
+" nnoremap <silent> <expr> <F3> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+nmap <F3> :GitGutterToggle<CR>
+nmap <F4> :Startify<CR>
 nmap <F5> :NERDTreeToggle<CR>
 nmap <F6> :TagbarToggle<CR>
 nmap <F7> :UndotreeToggle<cr>
@@ -173,13 +176,21 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 set signcolumn=yes
 let g:airline_theme='gruvbox'
-let g:solarized_termcolors=256
+let g:neosolarized_termcolors=256
+let g:neosolarized_contrast = "normal"
+let g:neosolarized_visibility = "normal"
+let g:neosolarized_vertSplitBgTrans = 1
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 0
+let g:neosolarized_termBoldAsBright = 1
 let g:onedark_termcolors=256
-let g:gruvbox_termcolors=255
 let g:onedark_hide_endofbuffer=1
 let g:onedark_terminal_italics=1
+let g:gruvbox_termcolors=255
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_light='medium'
+let g:gruvbox_sign_column='bg0'
 colorscheme gruvbox
 set background=light" use dark mode
 
@@ -203,6 +214,9 @@ nmap <silent> <leader>c :execute "set colorcolumn="
 
 " easymotion
 map <Leader> <Plug>(easymotion-prefix)
+
+" neoformat
+let g:neoformat_run_all_formatters = 1
 
 " vimux
 " Prompt for a command to run
@@ -346,3 +360,13 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 
 "python.jediEnabled": false
+
+" Autoinstall coc extension  
+let g:coc_global_extensions = [
+\ 'coc-ccls',
+\ 'coc-python',
+\ 'coc-rls',
+\ 'coc-java',
+\ 'coc-cmake',
+\ 'coc-marketplace',
+\ ]
