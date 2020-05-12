@@ -13,5 +13,8 @@
         }
       }
     }
-  }
+  },
+"suggest.detailMaxLength":0,
+"suggest.maxPreviewWidth":0,
+"suggest.detailField":"abbr"
 }

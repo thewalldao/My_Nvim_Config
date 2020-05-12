@@ -25,6 +25,8 @@ Plug 'tpope/vim-repeat'
 Plug 'vimwiki/vimwiki'
 Plug 'lilydjwg/colorizer'
 Plug 'mhinz/vim-startify'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'unblevable/quick-scope'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -127,7 +129,8 @@ filetype plugin indent on
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
 nmap <Leader>kd :set keymap=<CR>
 " nnoremap <silent> <expr> <F3> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-nmap <F3> :GitGutterToggle<CR>
+nmap <F2> :GitGutterToggle<CR>
+nmap <F3> :RnvimrToggle<CR>
 nmap <F4> :Startify<CR>
 nmap <F5> :NERDTreeToggle<CR>
 nmap <F6> :TagbarToggle<CR>
@@ -191,8 +194,15 @@ let g:gruvbox_termcolors=255
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_light='medium'
 let g:gruvbox_sign_column='bg0'
+
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#715FFF' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffe8' gui=underline ctermfg=81 cterm=underline
+augroup END
+
 colorscheme gruvbox
-set background=light" use dark mode
+set background=light " use dark mode
 
 " set background=light " uncomment to use light mode
 " True color
@@ -215,8 +225,29 @@ nmap <silent> <leader>c :execute "set colorcolumn="
 " easymotion
 map <Leader> <Plug>(easymotion-prefix)
 
+" quick-scope
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_lazy_highlight = 1
+
 " neoformat
 let g:neoformat_run_all_formatters = 1
+
+" Startify
+let g:startify_bookmarks = [
+	\ '$HOME/.config/nvim/init.vim',
+	\ '~/Mega/PROGRAM_BOOK/Learn_Java/Chapter1/Test.java',
+        \ '~/Mega/PROGRAM_BOOK/Py_ICS/test.py',
+	\ '~/Mega/PROGRAM_BOOK/C_language/test.c'
+	\ ]
+let g:startify_lists = [
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']       },
+          \ { 'type': 'files',     'header': ['   MRU']             },
+          \ { 'type': 'dir',       'header': ['   MRU '. getcwd()]  },
+          \ { 'type': 'sessions',  'header': ['   Sessions']        },
+          \ { 'type': 'commands',  'header': ['   Commands']        },
+          \ ]
+let g:startify_files_number = 5
 
 " vimux
 " Prompt for a command to run
@@ -240,6 +271,20 @@ omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
 xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+
+" fzf
+
+let g:fzf_tags_command = 'ctags -R'
+" Border color
+" let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+
+" rnvimr
+let g:rnvimr_layout = { 'relative': 'editor',
+	    \ 'width': float2nr(round(0.8 * &columns)),
+	    \ 'height': float2nr(round(0.8 * &lines)),
+	    \ 'col': float2nr(round(0.1 * &columns)),
+	    \ 'row': float2nr(round(0.1 * &lines)),
+	    \ 'style': 'minimal' }
 
 
 " coc.vim
@@ -360,6 +405,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 
 "python.jediEnabled": false
+"suggest.snippetIndicator":~
 
 " Autoinstall coc extension  
 let g:coc_global_extensions = [
