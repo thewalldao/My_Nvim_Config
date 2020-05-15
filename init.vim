@@ -47,6 +47,7 @@ call plug#end()
 
 " With this function you can reuse the same terminal in neovim.
 " You can toggle the terminal and also send a command to the same terminal.
+" test conflict
 
 let s:monkey_terminal_window = -1
 let s:monkey_terminal_buffer = -1
@@ -262,7 +263,7 @@ map <Leader>vz :VimuxZoomRunner<CR>
 
 " gitguter
 let g:gitgutter_max_signs = 500  " default value
-nmap ]`h <Plug>(GitGutterNextHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
