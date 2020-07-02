@@ -25,6 +25,7 @@ Plug 'tpope/vim-repeat'
 Plug 'vimwiki/vimwiki'
 Plug 'lilydjwg/colorizer'
 Plug 'mhinz/vim-startify'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -122,12 +123,13 @@ tnoremap <M-`> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
         autocmd FileType go nnoremap <F5> :call MonkeyTerminalExec('go run ' . expand('%'))<cr>
     augroup END
 
-
 filetype plugin indent on
+tnoremap <Esc> <C-\><C-n>:q!<CR> " close term
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
 nmap <Leader>kd :set keymap=<CR>
 " nnoremap <silent> <expr> <F3> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-nmap <F3> :GitGutterToggle<CR>
+nmap <F2> :GitGutterToggle<CR>
+nmap <F3> :RnvimrToggle<CR>
 nmap <F4> :Startify<CR>
 nmap <F5> :NERDTreeToggle<CR>
 nmap <F6> :TagbarToggle<CR>
@@ -141,6 +143,7 @@ autocmd Filetype c,cpp nmap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
 autocmd Filetype c,cpp nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
 autocmd Filetype java nmap <buffer> <F9> :w<CR> :12sp <CR> :term javac "%"<CR>
 autocmd Filetype java nmap <buffer> <F10> :w<CR> :12sp <CR> :term java "%<"<CR>
+autocmd Filetype rust nmap <buffer> <F9> :w<CR> :12sp <CR> :term cargo run --package new_rust_project --bin new_rust_project<CR>
 nmap gb :ls<CR>:b<Space>
 nmap <CR> :nohlsearch<cr>
 " navigate window easier
@@ -192,7 +195,7 @@ let g:gruvbox_italic=1
 let g:gruvbox_contrast_light='medium'
 let g:gruvbox_sign_column='bg0'
 colorscheme gruvbox
-set background=light" use dark mode
+set background=light " use dark mode
 
 " set background=light " uncomment to use light mode
 " True color
@@ -218,6 +221,22 @@ map <Leader> <Plug>(easymotion-prefix)
 " neoformat
 let g:neoformat_run_all_formatters = 1
 
+" Startify
+let g:startify_bookmarks = [
+	\ '$HOME/.config/nvim/init.vim',
+	\ '~/Mega/PROGRAM_BOOK/Learn_Java/Chapter1/Test.java',
+        \ '~/Mega/PROGRAM_BOOK/Py_ICS/test.py',
+	\ '~/Mega/PROGRAM_BOOK/C_language/test.c'
+	\ ]
+let g:startify_lists = [
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']       },
+          \ { 'type': 'files',     'header': ['   MRU']             },
+          \ { 'type': 'dir',       'header': ['   MRU '. getcwd()]  },
+          \ { 'type': 'sessions',  'header': ['   Sessions']        },
+          \ { 'type': 'commands',  'header': ['   Commands']        },
+          \ ]
+let g:startify_files_number = 5
+
 " vimux
 " Prompt for a command to run
 map <Leader>vp :VimuxPromptCommand<CR>
@@ -240,6 +259,20 @@ omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
 xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+
+" fzf
+
+let g:fzf_tags_command = 'ctags -R'
+" Border color
+" let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+
+" rnvimr
+let g:rnvimr_layout = { 'relative': 'editor',
+	    \ 'width': float2nr(round(0.8 * &columns)),
+	    \ 'height': float2nr(round(0.8 * &lines)),
+	    \ 'col': float2nr(round(0.1 * &columns)),
+	    \ 'row': float2nr(round(0.1 * &lines)),
+	    \ 'style': 'minimal' }
 
 
 " coc.vim
@@ -369,4 +402,5 @@ let g:coc_global_extensions = [
 \ 'coc-java',
 \ 'coc-cmake',
 \ 'coc-marketplace',
+\ 'coc-rust-analyzer',
 \ ]
