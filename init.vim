@@ -29,6 +29,7 @@ Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dylanaraps/pascal_lint.nvim'
 
 " Color Schemes , Icon
 Plug 'joshdick/onedark.vim'
@@ -143,7 +144,9 @@ autocmd Filetype c,cpp nmap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
 autocmd Filetype c,cpp nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
 autocmd Filetype java nmap <buffer> <F9> :w<CR> :12sp <CR> :term javac "%"<CR>
 autocmd Filetype java nmap <buffer> <F10> :w<CR> :12sp <CR> :term java "%<"<CR>
-autocmd Filetype rust nmap <buffer> <F9> :w<CR> :12sp <CR> :term cargo run --package new_rust_project --bin new_rust_project<CR>
+autocmd Filetype rust nmap <buffer> <F9> :w<CR> :12sp <CR> :term cargo run <CR>
+autocmd Filetype pascal nmap <buffer> <F9> :w<CR> :12sp <CR> :term fpc "%"<CR>
+autocmd Filetype pascal nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
 nmap gb :ls<CR>:b<Space>
 nmap <CR> :nohlsearch<cr>
 " navigate window easier
@@ -202,7 +205,7 @@ set background=light " use dark mode
 set number "relativenumber
 set mouse=a
 " set foldmethod=syntax
-autocmd FileType c,cpp set noet sw=2
+autocmd FileType c,cpp set noet sw=4
 autocmd FileType python set et sw=4
 autocmd FileType java set et sw=4
 " " show existing tab with 4 spaces width
