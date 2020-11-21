@@ -143,7 +143,7 @@ autocmd Filetype python nmap <buffer> <F9> :w<CR> :12sp <CR> :term python "%"<CR
 autocmd Filetype c,cpp nmap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
 autocmd Filetype c,cpp nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
 autocmd Filetype java nmap <buffer> <F9> :w<CR> :12sp <CR> :term javac "%"<CR>
-autocmd Filetype java nmap <buffer> <F10> :w<CR> :12sp <CR> :term java "%<"<CR>
+autocmd Filetype java nmap <buffer> <F10> :w<CR> :12sp <CR> :term java -enableassertions "%<"<CR>
 autocmd Filetype rust nmap <buffer> <F9> :w<CR> :12sp <CR> :term cargo run <CR>
 autocmd Filetype pascal nmap <buffer> <F9> :w<CR> :12sp <CR> :term fpc "%"<CR>
 autocmd Filetype pascal nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
@@ -227,7 +227,7 @@ let g:neoformat_run_all_formatters = 1
 " Startify
 let g:startify_bookmarks = [
 	\ '$HOME/.config/nvim/init.vim',
-	\ '~/Mega/PROGRAM_BOOK/Learn_Java/Chapter1/Test.java',
+	\ '~/Mega/PROGRAM_BOOK/Learn_Java/Absolute_Java/Test.java',
         \ '~/Mega/PROGRAM_BOOK/Py_ICS/test.py',
 	\ '~/Mega/PROGRAM_BOOK/C_language/test.c'
 	\ ]
