@@ -181,7 +181,7 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
-let g:airline_theme='gruvbox'
+let g:airline_theme= 'gruvbox'
 let g:neosolarized_termcolors=256
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_visibility = "normal"
