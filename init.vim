@@ -3,7 +3,7 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 " General Plugin
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sbdchd/neoformat'
@@ -132,10 +132,11 @@ nmap <Leader>kd :set keymap=<CR>
 nmap <F2> :GitGutterToggle<CR>
 nmap <F3> :RnvimrToggle<CR>
 nmap <F4> :Startify<CR>
-nmap <F5> :NERDTreeToggle<CR>
+nmap <F5> :CocCommand explorer --width 35<CR>
 nmap <F6> :TagbarToggle<CR>
 nmap <F7> :UndotreeToggle<cr>
 nmap <C-p> :FZF<CR>
+nmap <space>e :CocCommand explorer<CR>
 " autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
@@ -406,4 +407,5 @@ let g:coc_global_extensions = [
 \ 'coc-cmake',
 \ 'coc-marketplace',
 \ 'coc-rust-analyzer',
+\ 'coc-explorer'
 \ ]
