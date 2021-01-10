@@ -25,11 +25,12 @@ Plug 'tpope/vim-repeat'
 Plug 'vimwiki/vimwiki'
 Plug 'lilydjwg/colorizer'
 Plug 'mhinz/vim-startify'
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'kevinhwang91/rnvimr'
+" Plug 'ap/vim-buftabline'
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dylanaraps/pascal_lint.nvim'
+Plug 'luochen1990/rainbow'
 
 " Color Schemes , Icon
 Plug 'joshdick/onedark.vim'
@@ -148,6 +149,9 @@ autocmd Filetype java nmap <buffer> <F10> :w<CR> :12sp <CR> :term java -enableas
 autocmd Filetype rust nmap <buffer> <F9> :w<CR> :12sp <CR> :term cargo run <CR>
 autocmd Filetype pascal nmap <buffer> <F9> :w<CR> :12sp <CR> :term fpc "%"<CR>
 autocmd Filetype pascal nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
+autocmd Filetype typescript nmap <buffer> <F9> :w<CR> :12sp <CR> :term tsc "%"<CR>
+autocmd Filetype typescript nmap <buffer> <F10> :w<CR> :12sp <CR> :term node "./%<"<CR>
+autocmd Filetype javascript nmap <buffer> <F9> :w<CR> :12sp <CR> :term node "./%<"<CR>
 nmap gb :ls<CR>:b<Space>
 nmap <CR> :nohlsearch<cr>
 " navigate window easier
@@ -221,6 +225,12 @@ nmap <silent> <leader>c :execute "set colorcolumn="
 
 " easymotion
 map <Leader> <Plug>(easymotion-prefix)
+
+" vim buffer
+" set hidden
+
+" rainbow parentheses
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 " neoformat
 let g:neoformat_run_all_formatters = 1
@@ -378,6 +388,20 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline#extensions#tabline#show_close_button = 1
+" let g:airline#extensions#tabline#close_symbol = '×'
+" let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline_detect_modified=1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '>'
+nnoremap <C-PageUp> :bnext<CR>
+nnoremap <C-PageDown> :bprev<CR>
+nnoremap <C-Home> :bfirst<CR>
+nnoremap <C-End> :blast<CR>
 
 " Mappings using CoCList:
 " Show all diagnostics.
@@ -407,5 +431,10 @@ let g:coc_global_extensions = [
 \ 'coc-cmake',
 \ 'coc-marketplace',
 \ 'coc-rust-analyzer',
-\ 'coc-explorer'
+\ 'coc-explorer',
+\ 'coc-tsserver',
+\ 'coc-eslint',
+\ 'coc-json',
+\ 'coc-prettier',
+\ 'coc-css',
 \ ]

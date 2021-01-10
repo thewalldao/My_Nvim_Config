@@ -16,5 +16,6 @@
   },
 "suggest.detailMaxLength":0,
 "suggest.maxPreviewWidth":0,
-"suggest.detailField":"abbr"
+"suggest.detailField":"abbr",
+"python.jediEnabled": false
 }
