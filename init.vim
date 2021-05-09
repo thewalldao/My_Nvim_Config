@@ -12,7 +12,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
-Plug 'benmills/vimux'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'easymotion/vim-easymotion'
@@ -38,6 +37,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'ryanoasis/vim-devicons'
 Plug 'icymind/neosolarized'
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as' : 'dracula' }
 
 " Initialize plugin system
 call plug#end()
@@ -163,6 +163,8 @@ nmap <C-H> <C-W><C-H>
 syntax enable
 autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
 set clipboard=unnamedplus " coppy vim to outside "need install xclip"
+set clipboard=unnamed
+set clipboard+=unnamedplus " coppy vim to outside "need install xclip"
 set noswapfile
 set encoding=UTF-8
 set termguicolors
@@ -186,7 +188,7 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
-let g:airline_theme= 'gruvbox'
+let g:airline_theme= 'dracula'
 let g:neosolarized_termcolors=256
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_visibility = "normal"
@@ -202,8 +204,9 @@ let g:gruvbox_termcolors=255
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_light='medium'
 let g:gruvbox_sign_column='bg0'
-colorscheme gruvbox
-set background=light " use dark mode
+let g:dracula_italic = 1
+colorscheme dracula
+set background=dark " use dark mode
 
 " set background=light " uncomment to use light mode
 " True color
@@ -250,16 +253,6 @@ let g:startify_lists = [
           \ { 'type': 'commands',  'header': ['   Commands']        },
           \ ]
 let g:startify_files_number = 5
-
-" vimux
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
-" Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
-" Zoom the tmux runner pane
-map <Leader>vz :VimuxZoomRunner<CR>
 
 
 " gitguter
