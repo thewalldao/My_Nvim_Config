@@ -37,6 +37,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'ryanoasis/vim-devicons'
 Plug 'icymind/neosolarized'
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as' : 'dracula' }
 
 " Initialize plugin system
 call plug#end()
@@ -187,7 +188,7 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
-let g:airline_theme= 'gruvbox'
+let g:airline_theme= 'dracula'
 let g:neosolarized_termcolors=256
 let g:neosolarized_contrast = "normal"
 let g:neosolarized_visibility = "normal"
@@ -203,8 +204,9 @@ let g:gruvbox_termcolors=255
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_light='medium'
 let g:gruvbox_sign_column='bg0'
-colorscheme gruvbox
-set background=light " use dark mode
+let g:dracula_italic = 1
+colorscheme dracula
+set background=dark " use dark mode
 
 " set background=light " uncomment to use light mode
 " True color
