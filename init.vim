@@ -12,7 +12,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
-Plug 'benmills/vimux'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'easymotion/vim-easymotion'
@@ -163,6 +162,8 @@ nmap <C-H> <C-W><C-H>
 syntax enable
 autocmd BufEnter * silent! lcd %:p:h " set auto cd to dir of current file
 set clipboard=unnamedplus " coppy vim to outside "need install xclip"
+set clipboard=unnamed
+set clipboard+=unnamedplus " coppy vim to outside "need install xclip"
 set noswapfile
 set encoding=UTF-8
 set termguicolors
@@ -250,16 +251,6 @@ let g:startify_lists = [
           \ { 'type': 'commands',  'header': ['   Commands']        },
           \ ]
 let g:startify_files_number = 5
-
-" vimux
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
-" Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
-" Zoom the tmux runner pane
-map <Leader>vz :VimuxZoomRunner<CR>
 
 
 " gitguter
