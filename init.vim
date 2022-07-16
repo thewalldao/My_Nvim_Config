@@ -39,6 +39,7 @@ Plug 'icymind/neosolarized'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as' : 'dracula' }
 
+Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
 " Initialize plugin system
 call plug#end()
 
@@ -115,8 +116,8 @@ function! MonkeyTerminalExec(cmd)
 endfunction
 
 " With this maps you can now toggle the terminal
-nnoremap <M-`> :call MonkeyTerminalToggle()<cr>
-tnoremap <M-`> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
+nnoremap <F8> :call MonkeyTerminalToggle()<cr>
+tnoremap <F8> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
 
 " This an example on how specify command with different types of files.
     augroup go
@@ -125,6 +126,7 @@ tnoremap <M-`> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
         autocmd FileType go nnoremap <F5> :call MonkeyTerminalExec('go run ' . expand('%'))<cr>
     augroup END
 
+set guifont=Noto\ Sans\ Mono:h10
 filetype plugin indent on
 tnoremap <Esc> <C-\><C-n>:q!<CR> " close term
 nmap <Leader>kt :set keymap=vietnamese-telex<CR>
