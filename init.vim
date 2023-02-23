@@ -25,6 +25,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'lilydjwg/colorizer'
 Plug 'mhinz/vim-startify'
 Plug 'kevinhwang91/rnvimr'
+Plug 'preservim/nerdtree'
 " Plug 'ap/vim-buftabline'
 
 " Language support
@@ -138,7 +139,9 @@ nmap <Leader>kd :set keymap=<CR>
 nmap <F2> :GitGutterToggle<CR>
 nmap <F3> :RnvimrToggle<CR>
 nmap <F4> :Startify<CR>
-nmap <F5> :CocCommand explorer --width 35<CR>
+" nmap <F5> :CocCommand explorer --width 35<CR>
+nmap <F17> :NERDTreeFocus<CR>
+nmap <F5> :NERDTreeToggle<CR>
 nmap <F6> :TagbarToggle<CR>
 nmap <F7> :UndotreeToggle<cr>
 nmap <C-p> :FZF<CR>
@@ -146,19 +149,23 @@ nmap <space>e :CocCommand explorer<CR>
 " autocmd Filetype python nnoremap <buffer> <F9> :w<CR>:vert term python "%"<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F9> :w<CR> :vert term make<CR>
 " autocmd Filetype c,cpp nnoremap <buffer> <F10> :w<CR> :vert term ./%<<CR>
-autocmd Filetype python nmap <buffer> <F9> :w<CR> :12sp <CR> :term python "%"<CR>
-autocmd Filetype c,cpp nmap <buffer> <F9> :w<CR> :12sp <CR> :term make<CR>
-autocmd Filetype c,cpp nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
-autocmd Filetype java nmap <buffer> <F9> :w<CR> :12sp <CR> :term javac "%"<CR>
-autocmd Filetype java nmap <buffer> <F10> :w<CR> :12sp <CR> :term java -enableassertions "%<"<CR>
-autocmd Filetype rust nmap <buffer> <F9> :w<CR> :12sp <CR> :term cargo run <CR>
-autocmd Filetype pascal nmap <buffer> <F9> :w<CR> :12sp <CR> :term fpc "%"<CR>
-autocmd Filetype pascal nmap <buffer> <F10> :w<CR> :12sp <CR> :term "./%<"<CR>
-autocmd Filetype typescript nmap <buffer> <F9> :w<CR> :12sp <CR> :term tsc "%"<CR>
-autocmd Filetype typescript nmap <buffer> <F10> :w<CR> :12sp <CR> :term node "./%<"<CR>
-autocmd Filetype javascript nmap <buffer> <F9> :w<CR> :12sp <CR> :term node "./%<"<CR>
+autocmd Filetype python nmap <buffer> <F9> :update<CR>:12sp<CR>:term python "%"<CR>
+autocmd Filetype c,cpp nmap <buffer> <F9> :update<CR> :12sp<CR> :term make<CR>
+autocmd Filetype c,cpp nmap <buffer> <F10> :update<CR> :12sp<CR> :term "./%<"<CR>
+autocmd Filetype java nmap <buffer> <F9> :update<CR> :12sp<CR> :term javac "%"<CR>
+autocmd Filetype java nmap <buffer> <F10> :update<CR> :12sp<CR> :term java -enableassertions "%<"<CR>
+autocmd Filetype rust nmap <buffer> <F9>r :update<CR>:12sp<CR>:term cargo run<CR>
+autocmd Filetype rust nmap <buffer> <F9>t :update<CR>:12sp<CR>:term cargo test<CR>
+autocmd Filetype rust nmap <buffer> <F9>c :update<CR>:12sp<CR>:term cargo check<CR>
+autocmd Filetype rust nmap <buffer> <F9>b :update<CR>:12sp<CR>:term cargo build<CR>
+autocmd Filetype rust nmap <buffer> <F9>d :update<CR>:! cargo doc --open<CR>
+autocmd Filetype pascal nmap <buffer> <F9> :update<CR> :12sp<CR> :term fpc "%"<CR>
+autocmd Filetype pascal nmap <buffer> <F10> :update<CR> :12sp<CR> :term "./%<"<CR>
+autocmd Filetype typescript nmap <buffer> <F9> :update<CR> :12sp<CR> :term tsc "%"<CR>
+autocmd Filetype typescript nmap <buffer> <F10> :update<CR> :12sp<CR> :term node "./%<"<CR>
+autocmd Filetype javascript nmap <buffer> <F9> :update<CR> :12sp<CR> :term node "./%<"<CR>
 nmap gb :ls<CR>:b<Space>
-nmap <CR> :nohlsearch<cr>
+" nmap <CR> :nohlsearch<cr>
 " navigate window easier
 nmap <C-J> <C-W><C-J>
 nmap <C-K> <C-W><C-K>
@@ -472,7 +479,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>"python.jediEnabled":
 " Autoinstall coc extension  
 let g:coc_global_extensions = [
 \ 'coc-pyright',
-\ 'coc-rls',
 \ 'coc-java',
 \ 'coc-cmake',
 \ 'coc-marketplace',
